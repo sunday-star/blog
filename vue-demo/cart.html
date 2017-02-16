@@ -238,6 +238,7 @@
                 this.list.forEach((val, index) => {
                     val.selected = this.selectedAll
                 })
+                this.calcTotalMoney()
             },
             changeNum(i, type) {
                 if (type > 0 && i.productQuentity > 0) {
