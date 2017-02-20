@@ -1,7 +1,9 @@
 <template>
   <div class="place" :style="{ height: height + 'px' }">
     <div class="headbar" :style="{ height: height + 'px', 'line-height': height + 'px' }">
+      <slot name="left"></slot>
       <slot></slot>
+      <slot name="right"></slot>
     </div>
   </div>
 </template>

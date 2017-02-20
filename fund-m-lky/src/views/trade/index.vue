@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header-view text="交易大厅"></header-view>
+    <headbar>交易大厅</headbar>
   </div>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
   <div>
-    <headbar>资讯中心</headbar>
+    <headbar>众筹详情</headbar>
   </div>
 </template>

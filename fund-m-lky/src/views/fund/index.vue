@@ -1,6 +1,6 @@
 <template>
-  <div class="">
-    <headbar>众筹</headbar>
+  <div>
+    <headbar>众筹大厅</headbar>
   </div>
 </template>
 
