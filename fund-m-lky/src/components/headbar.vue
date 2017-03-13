@@ -19,10 +19,14 @@
   }
 </script>
 
-<style lang="less" scoped>
-  .headbar {
-    background-color: #ff6502;
-    color: #fff;
-    text-align: center;
-  }
+<style lang="stylus" rel="stylesheet/stylus" scoped>
+  .headbar
+    background-color: #ff6502
+    color: #fff
+    left: 50%
+    position: fixed
+    text-align: center
+    top: 0
+    transform: translateX(-50%)
+    width: 100%
 </style>

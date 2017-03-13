@@ -24,8 +24,7 @@
   }
 </script>
 
-<style lang="less">
-  .navbar-item {
-    flex: 1;
-  }
+<style lang="stylus" rel="stylesheet/stylus">
+  .navbar-item
+    flex: 1
 </style>

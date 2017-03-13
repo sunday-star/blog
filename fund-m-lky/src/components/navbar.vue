@@ -32,8 +32,12 @@
   }
 </script>
 
-<style lang="less" scoped>
-  .navbar {
-    bottom: 0;display: flex;left: 50%;position: fixed;transform: translateX(-50%);width: 100%;
-  }
+<style lang="stylus" rel="stylesheet/stylus" scoped>
+  .navbar
+    bottom: 0
+    display: flex
+    left: 50%
+    position: fixed
+    transform: translateX(-50%)
+    width: 100%
 </style>
