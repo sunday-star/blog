@@ -15,7 +15,7 @@
 <style lang="stylus">
   .fund-item
     background-color: #fff
-    padding: 15px
+    padding: 10px
     &:not(:first-child)
       border-top: 1px solid #eee
     > a
