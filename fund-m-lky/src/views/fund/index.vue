@@ -1,6 +1,9 @@
 <template>
   <div class="fund">
-    <headbar>众筹大厅</headbar>
+    <headbar>
+      众筹大厅
+      <router-link slot="right" :to="{path: '/fund/manage'}">管理</router-link>
+    </headbar>
     <div class="fund-list">
       <fund-item v-for="item in fundItems" :item="item"></fund-item>
     </div>

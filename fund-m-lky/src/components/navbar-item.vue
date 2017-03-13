@@ -1,7 +1,7 @@
 <template>
-  <div class="navbar-item" @click="routerPush">
+  <router-link :to="prop.route" class="navbar-item" active-class="active">
     <slot></slot>
-  </div>
+  </router-link>
 </template>
 
 <script>
@@ -13,13 +13,6 @@
           return {}
         }
       }
-    },
-    methods: {
-      routerPush () {
-        if (this.prop) {
-          this.$router.push(this.prop.route)
-        }
-      }
     }
   }
 </script>
@@ -27,4 +20,8 @@
 <style lang="stylus" rel="stylesheet/stylus">
   .navbar-item
     flex: 1
+    line-height: 50px
+    text-align: center
+    &.active
+      background: rgba(0,0,0,.1)
 </style>

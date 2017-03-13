@@ -1,32 +1,38 @@
 <template>
-  <div class="place" :style="{ height: height + 'px' }">
-    <div class="headbar" :style="{ height: height + 'px', 'line-height': height + 'px' }">
-      <slot name="left"></slot>
+  <div class="place">
+    <div class="headbar">
+      <div class="headbar-left">
+        <slot name="left"></slot>
+      </div>
       <slot></slot>
-      <slot name="right"></slot>
+      <div class="headbar-right">
+        <slot name="right"></slot>
+      </div>
     </div>
   </div>
 </template>
 
-<script>
-  export default {
-    props: {
-      height: {
-        type: Number,
-        default: 46
-      }
-    }
-  }
-</script>
-
 <style lang="stylus" rel="stylesheet/stylus" scoped>
+  .place
+    height: 46px
   .headbar
     background-color: #ff6502
     color: #fff
+    height: 46px
     left: 50%
+    line-height: 46px
     position: fixed
     text-align: center
     top: 0
     transform: translateX(-50%)
     width: 100%
+    &-left
+      height: 100%
+      left: 15px
+      position: absolute
+      top: 0
+    &-right
+      position: absolute
+      right: 15px
+      top: 0
 </style>
