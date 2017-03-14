@@ -1,9 +1,9 @@
 <template>
-  <div id="app">
+  <div class="app" style="height: 100%;">
     <transition :name="transitionName">
       <router-view></router-view>
     </transition>
-    <nav-bar :items="navbarItems"></nav-bar>
+    <nav-bar :items="navbarItems" v-show="navbarShow"></nav-bar>
   </div>
 </template>
 
@@ -15,6 +15,7 @@
     },
     data () {
       return {
+        navbarShow: true,
         transitionName: 'slide-left',
         navbarItems: [
           {name: '交易', 'route': { path: '/trade' }, icon: ''},
@@ -24,8 +25,16 @@
         ]
       }
     },
+    mounted () {
+      this.$app.init(this)
+    },
     watch: {
       '$route' (to, from) {
+        if (to.path === '/fund/detail') {
+          this.navbarShow = false
+        } else {
+          this.navbarShow = true
+        }
         const toDepth = to.path.split('/').length
         const fromDepth = from.path.split('/').length
         this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
@@ -41,7 +50,7 @@
   body
     background-color: #fbf9fe
   .slide-left-enter-active,.slide-right-enter-active
-    transition: all .3s ease
+    transition: all 0.3s ease
   .slide-left-leave-active,.slide-right-leave-active
     transition: all 0.5 cubic-bezier(1.0, 0.5, 0.8, 1.0)
   .slide-left-enter
@@ -53,4 +62,21 @@
   .slide-right-leave
     transform: translateX(-100%)
     opacity: 0
+  .fade-enter-active,.fade-leave-active
+    transition: opacity 1s ease
+  .fade-enter,.fade-leave-active
+    opacity: 0
+  .img
+    display: block
+    width: 100%
+  .flex
+    display: flex
+    &.between
+      justify-content: space-between
+    .item
+      flex: 1
+  .text-center
+    text-align: center
+  .orange
+    color: #ff6503
 </style>

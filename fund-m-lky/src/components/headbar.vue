@@ -12,15 +12,16 @@
   </div>
 </template>
 
-<style lang="stylus" rel="stylesheet/stylus" scoped>
+<style lang="stylus" scoped>
   .place
-    height: 46px
+    height: 42px
   .headbar
     background-color: #ff6502
     color: #fff
-    height: 46px
+    font-size: 16px
+    height: 42px
     left: 50%
-    line-height: 46px
+    line-height: 42px
     position: fixed
     text-align: center
     top: 0

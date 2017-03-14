@@ -29,6 +29,8 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
+  .place
+    height: 50px
   .navbar
     bottom: 0
     display: flex
