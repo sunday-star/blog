@@ -30,4 +30,6 @@
   .fund-intro
     background: #fff
     padding: 12px
+    img
+      width: 100%
 </style>

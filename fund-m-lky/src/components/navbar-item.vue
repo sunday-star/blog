@@ -6,6 +6,7 @@
 
 <script>
   export default {
+    name: 'navbar-item',
     props: {
       prop: {
         type: Object,

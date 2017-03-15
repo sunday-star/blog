@@ -30,7 +30,7 @@
     },
     watch: {
       '$route' (to, from) {
-        if (to.path === '/fund/detail') {
+        if (to.meta.navbarHide) {
           this.navbarShow = false
         } else {
           this.navbarShow = true
@@ -79,4 +79,14 @@
     text-align: center
   .orange
     color: #ff6503
+  .a-back
+    left: 20px
+    height: 15px
+    position: absolute
+    top: 10px
+    width: 15px
+    border-width: 3px
+    border-color: #fff transparent transparent #fff
+    border-style: solid
+    transform: rotate(-45deg)
 </style>

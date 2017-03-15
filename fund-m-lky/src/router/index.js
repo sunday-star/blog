@@ -22,14 +22,14 @@ const router = new Router({
     { path: '/mine', component: mineIndex },
     { path: '/fund', component: fundIndex },
     { path: '/fund/manage', component: fundManage },
-    { path: '/fund/detail', component: fundDetail, meta: { requireAuth: true }},
+    { path: '/fund/detail', component: fundDetail, meta: { requireAuth: true, navbarHide: true }},
     { path: '/fund/intro', component: fundIntro}
   ]
 })
 
 router.beforeEach((to, from, next) => {
     if (to.matched.some(r => r.meta.requireAuth)) {
-        console.log('需要验证')
+        router.app.$toast('需要验证')
         next()
     } else {
         next()

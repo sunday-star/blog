@@ -39,4 +39,5 @@
     position: fixed
     transform: translateX(-50%)
     width: 100%
+    z-index: 1000
 </style>

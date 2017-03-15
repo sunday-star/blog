@@ -1,6 +1,9 @@
 <template>
   <div class="fund-detail">
-    <headbar>{{title}}</headbar>
+    <headbar>
+      <router-link class="a-back" to="/fund"></router-link>
+      {{title}}
+    </headbar>
     <img :src="data.picture" :alt="title" class="img">
     <div class="btn-groups">
       <a href="#" class="btn-l">我要支持</a>
@@ -33,7 +36,7 @@
     <div class="content"></div>
     <div class="title">项目进展</div>
     <div class="content"></div>
-    <div class="title">热门评论</div>
+    <div class="title">热门评论<router-link class="pull-right" :to="{path: '/fund/comment'}">更多评论</router-link></div>
     <div class="content"></div>
     <div class="title">权益说明</div>
     <div class="content" v-html="data.repay"></div>
@@ -49,6 +52,7 @@
       }
     },
     mounted () {
+      this.$toast.close()
       this.$http.get('/api/fund/detail?id=' + this.$route.query.id).then(res => {
         if (res.status >= 200 && res.status < 300) {
           if (res.data && res.data.error === '0') {
@@ -72,6 +76,10 @@
       color: #333
       font-size: 16px
       padding: 10px 12px
+      .pull-right
+        color: #999
+        float: right
+        font-size: 14px
     .content
       background: #fff
       margin-bottom: 12px

@@ -7,11 +7,14 @@ import router from './router'
 import axios from 'axios'
 import util from './util.js'
 import FastClick from 'fastclick'
+import promise from 'es6-promise'
 import Swiper from 'swiper'
 import 'swiper/dist/css/swiper.min.css'
+import install from './components/install.js'
 window.Swiper = Swiper
-require('es6-promise').polyfill()
+promise.polyfill()
 
+Vue.use(install)
 import headbar from 'components/headbar'
 Vue.component('headbar', headbar)
 

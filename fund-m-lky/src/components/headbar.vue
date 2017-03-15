@@ -27,6 +27,7 @@
     top: 0
     transform: translateX(-50%)
     width: 100%
+    z-index: 1000
     &-left
       height: 100%
       left: 15px
