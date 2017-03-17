@@ -10,6 +10,8 @@ const fundIndex = r => require.ensure([], () => r(require('../views/fund/index.v
 const fundManage = r => require.ensure([], () => r(require('../views/fund/manage.vue')), 'g-fund')
 const fundDetail = r => require.ensure([], () => r(require('../views/fund/detail.vue')), 'g-fund')
 const fundIntro = r => require.ensure([], () => r(require('../views/fund/intro.vue')), 'g-fund')
+const fundDevelopment = r => require.ensure([], () => r(require('../views/fund/development.vue')), 'g-fund')
+const fundComment = r => require.ensure([], () => r(require('../views/fund/comment.vue')), 'g-fund')
 
 Vue.use(Router)
 
@@ -23,7 +25,9 @@ const router = new Router({
     { path: '/fund', component: fundIndex },
     { path: '/fund/manage', component: fundManage },
     { path: '/fund/detail', component: fundDetail, meta: { requireAuth: true, navbarHide: true }},
-    { path: '/fund/intro', component: fundIntro}
+    { path: '/fund/intro', component: fundIntro},
+    { path: '/fund/development', component: fundDevelopment},
+    { path: '/fund/comment', component: fundComment, meta: { requireAuth: true, navbarHide: true}}
   ]
 })
 

@@ -21,8 +21,13 @@
 <style lang="stylus" rel="stylesheet/stylus">
   .navbar-item
     flex: 1
-    line-height: 50px
     text-align: center
     &.active
       background: rgba(0,0,0,.1)
+      color: #ff6503
+    span
+      display: block
+      height: 22px
+      margin: 6px auto 2px
+      width: 27px
 </style>

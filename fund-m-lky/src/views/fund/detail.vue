@@ -1,7 +1,7 @@
 <template>
   <div class="fund-detail">
     <headbar>
-      <router-link class="a-back" to="/fund"></router-link>
+      <router-link class="icon-back" to="/fund" slot="left"></router-link>
       {{title}}
     </headbar>
     <img :src="data.picture" :alt="title" class="img">
@@ -34,17 +34,23 @@
     </div>
     <div class="title">项目发起人</div>
     <div class="content"></div>
-    <div class="title">项目进展</div>
+    <div class="title">项目进展<router-link class="pull-right" :to="{path: '/fund/development', query: {id: data.id}}">查看全部</router-link></div>
     <div class="content"></div>
-    <div class="title">热门评论<router-link class="pull-right" :to="{path: '/fund/comment'}">更多评论</router-link></div>
-    <div class="content"></div>
+    <div class="title">热门评论<router-link class="pull-right" :to="{path: '/fund/comment', query: {id: data.id}}">更多评论</router-link></div>
+    <div class="content">
+      <comment-item :item="data.comment"></comment-item>
+    </div>
     <div class="title">权益说明</div>
     <div class="content" v-html="data.repay"></div>
   </div>
 </template>
 
 <script>
+  import commentItem from '../../components/comment-item.vue'
   export default {
+    components: {
+      commentItem
+    },
     data () {
       return {
         title: '',
@@ -84,6 +90,8 @@
       background: #fff
       margin-bottom: 12px
       padding: 12px
+      .comment-item
+        padding: 0
       .btn
         background: #ff6503
         border-radius: 5px

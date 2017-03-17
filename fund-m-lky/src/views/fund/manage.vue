@@ -1,5 +1,5 @@
 <template>
   <div class="fund-manage">
-    <headbar>众筹管理</headbar>
+    <headbar><router-link class="icon-back" to="/fund" slot="left"></router-link>众筹管理</headbar>
   </div>
 </template>

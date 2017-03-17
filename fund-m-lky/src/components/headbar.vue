@@ -34,6 +34,7 @@
       position: absolute
       top: 0
     &-right
+      height: 100%
       position: absolute
       right: 15px
       top: 0

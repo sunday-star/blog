@@ -1,7 +1,7 @@
 <template>
   <div class="place">
     <div class="navbar" :style="{'background': bg }">
-      <navbar-item v-for="(item, i) in items" :prop="item">{{item.name}}</navbar-item>
+      <navbar-item v-for="(item, i) in items" :prop="item"><span :class="item.icon"></span>{{item.name}}</navbar-item>
     </div>
   </div>
 </template>

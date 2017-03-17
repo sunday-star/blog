@@ -1,5 +1,7 @@
 <template>
-  <div class="toast" v-show="visible" >{{message}}</div>
+  <transition name="slide-left">
+    <div class="toast" v-show="visible" >{{message}}</div>
+  </transition>
 </template>
 
 <script>

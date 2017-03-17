@@ -2,7 +2,7 @@
   <div class="fund">
     <headbar>
       众筹大厅
-      <router-link slot="right" :to="{path: '/fund/manage'}">管理</router-link>
+      <router-link slot="right" :to="{path: '/fund/manage'}"><i class="icon-manage"></i></router-link>
     </headbar>
     <slider :slideItems="fundBanners"></slider>
     <div class="flex">
@@ -16,7 +16,7 @@
         <p class="orange">{{fund.fund_money}}</p>共筹集资金
       </div>
     </div>
-    <div class="fund-list">
+    <div class="fund-list" v-scroll="onScroll">
       <fund-item v-for="item in fundItems" :item="item"></fund-item>
     </div>
   </div>
@@ -36,6 +36,11 @@
         total: '',
         fundBanners: [],
         fundItems: []
+      }
+    },
+    methods: {
+      onScroll () {
+        console.log('123')
       }
     },
     mounted () {

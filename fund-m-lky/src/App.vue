@@ -18,10 +18,10 @@
         navbarShow: true,
         transitionName: 'slide-left',
         navbarItems: [
-          {name: '交易', 'route': { path: '/trade' }, icon: ''},
-          {name: '众筹', 'route': { path: '/fund' }, icon: ''},
-          {name: '资讯', 'route': { path: '/news'}, icon: ''},
-          {name: '我的', 'route': { path: '/mine'}, icon: ''}
+          {name: '交易', 'route': { path: '/trade' }, icon: 'icon-deal'},
+          {name: '众筹', 'route': { path: '/fund' }, icon: 'icon-fund'},
+          {name: '资讯', 'route': { path: '/news'}, icon: 'icon-news'},
+          {name: '我的', 'route': { path: '/mine'}, icon: 'icon-user'}
         ]
       }
     },
@@ -45,6 +45,46 @@
 
 <style lang="stylus" rel="stylesheet/stylus">
   @import './assets/css/base.css'
+  .icon-back
+    background: url('./assets/img/left.png') no-repeat center center
+    background-size: 100% 100%
+    display: inline-block
+    height: 24px
+    margin-left: -3px
+    margin-top: 9px
+    width: 24px
+  .icon-deal
+    background: url('./assets/img/icon-deal.png') no-repeat center center
+    background-size: 100% 100%
+  .icon-fund
+    background: url('./assets/img/icon-fund.png') no-repeat center center
+    background-size: 100% 100%
+  .icon-news
+    background: url('./assets/img/icon-news.png') no-repeat center center
+    background-size: 100% 100%
+  .icon-user
+    background: url('./assets/img/icon-user.png') no-repeat center center
+    background-size: 100% 100%
+  .active
+    .icon-deal
+      background: url('./assets/img/icon-deal-active.png') no-repeat center center
+      background-size: 100% 100%
+    .icon-fund
+      background: url('./assets/img/icon-fund-active.png') no-repeat center center
+      background-size: 100% 100%
+    .icon-news
+      background: url('./assets/img/icon-news-active.png') no-repeat center center
+      background-size: 100% 100%
+    .icon-user
+      background: url('./assets/img/icon-user-active.png') no-repeat center center
+      background-size: 100% 100%
+  .icon-manage
+    background: url('./assets/img/icon-manage.png') no-repeat center center
+    background-size: 100% 100%
+    display: inline-block
+    height: 24px
+    margin-top: 8px
+    width: 24px
   html,body
     height: 100%
   body
@@ -79,14 +119,4 @@
     text-align: center
   .orange
     color: #ff6503
-  .a-back
-    left: 20px
-    height: 15px
-    position: absolute
-    top: 10px
-    width: 15px
-    border-width: 3px
-    border-color: #fff transparent transparent #fff
-    border-style: solid
-    transform: rotate(-45deg)
 </style>

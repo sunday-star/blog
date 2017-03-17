@@ -8,12 +8,15 @@ import axios from 'axios'
 import util from './util.js'
 import FastClick from 'fastclick'
 import promise from 'es6-promise'
+import qs from 'qs'
 import Swiper from 'swiper'
 import 'swiper/dist/css/swiper.min.css'
 import install from './components/install.js'
+import scroll from './components/scroll.js'
 window.Swiper = Swiper
 promise.polyfill()
 
+Vue.use(scroll)
 Vue.use(install)
 import headbar from 'components/headbar'
 Vue.component('headbar', headbar)
@@ -23,6 +26,10 @@ if ('addEventListener' in document) {
     FastClick.attach(document.body)
   }, false)
 }
+// 处理post参数的formdata格式化
+axios.defaults.transformRequest = [function (data) {
+  return qs.stringify(data)
+}]
 
 Vue.prototype.$app = util
 Vue.prototype.$http = axios
