@@ -1,6 +1,6 @@
 <template>
   <div class="fund-intro">
-    <headbar>项目详情</headbar>
+    <headbar><router-link class="icon-back" :to="{path: '/fund/detail?id=' + this.$route.query.id}" slot="left"></router-link>项目详情</headbar>
     <div v-html="intro"></div>
   </div>
 </template>

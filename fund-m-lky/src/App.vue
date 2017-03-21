@@ -30,6 +30,7 @@
     },
     watch: {
       '$route' (to, from) {
+        document.body.scrollTop = 0
         if (to.meta.navbarHide) {
           this.navbarShow = false
         } else {
@@ -45,6 +46,22 @@
 
 <style lang="stylus" rel="stylesheet/stylus">
   @import './assets/css/base.css'
+  .icon-save
+    background: url('./assets/img/icon-save.png') no-repeat left top
+    background-size: 100% 100%
+    display: inline-block
+    height: 20px
+    margin-right: 5px
+    vertical-align: middle
+    width: 23px
+  .icon-save-no
+    background: url('./assets/img/icon-save-no.png') no-repeat left top
+    background-size: 100% 100%
+    display: inline-block
+    height: 20px
+    margin-right: 5px
+    vertical-align: middle
+    width: 23px
   .icon-back
     background: url('./assets/img/left.png') no-repeat center center
     background-size: 100% 100%

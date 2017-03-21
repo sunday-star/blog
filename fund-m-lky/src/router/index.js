@@ -8,6 +8,7 @@ const mineIndex = r => require.ensure([], () => r(require('../views/mine/index.v
 // fund
 const fundIndex = r => require.ensure([], () => r(require('../views/fund/index.vue')), 'g-fund')
 const fundManage = r => require.ensure([], () => r(require('../views/fund/manage.vue')), 'g-fund')
+const fundRepay = r => require.ensure([], () => r(require('../views/fund/repay.vue')), 'g-fund')
 const fundDetail = r => require.ensure([], () => r(require('../views/fund/detail.vue')), 'g-fund')
 const fundIntro = r => require.ensure([], () => r(require('../views/fund/intro.vue')), 'g-fund')
 const fundDevelopment = r => require.ensure([], () => r(require('../views/fund/development.vue')), 'g-fund')
@@ -24,6 +25,7 @@ const router = new Router({
     { path: '/mine', component: mineIndex },
     { path: '/fund', component: fundIndex },
     { path: '/fund/manage', component: fundManage },
+    { path: '/fund/repay', component: fundRepay },
     { path: '/fund/detail', component: fundDetail, meta: { requireAuth: true, navbarHide: true }},
     { path: '/fund/intro', component: fundIntro},
     { path: '/fund/development', component: fundDevelopment},

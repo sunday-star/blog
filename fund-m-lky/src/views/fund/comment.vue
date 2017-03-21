@@ -1,12 +1,13 @@
 <template>
-  <div class="fund-comment">
+  <div class="fund-comment" :class="{'repayBack': repay}">
     <headbar><router-link class="icon-back" :to="{path: '/fund/detail?id=' + this.$route.query.id}" slot="left"></router-link>更多评论</headbar>
     <div class="comment-list">
       <transition-group name="list">
-        <comment-item v-for="item in commentItems" :item="item" :key="item"></comment-item>
+        <comment-item v-for="(item, index) in commentItems" :item="item" :key="item" @repay="repayBack(index, item.author.name)"></comment-item>
       </transition-group>
     </div>
     <div class="comment-repay">
+      <div class="repay-back" v-if="repay">回复: <span style="color: #ff6503">{{authorName}}</span></div>
       <div class="flex">
         <input type="text" class="input" v-model="comment">
         <a class="btn" @click="postComment">发布</a>
@@ -24,7 +25,9 @@
     data () {
       return {
         commentItems: [],
-        comment: ''
+        comment: '',
+        repay: false,
+        authorName: ''
       }
     },
     mounted () {
@@ -36,6 +39,20 @@
           if (res.status >= 200 && res.status < 300) {
             if (res.data && res.data.error === '0') {
               this.commentItems = res.data.data.comment
+              this.$http.get('/api/user/index?sid=' + this.$app.sid()).then(res => {
+                if (res.status >= 200 && res.status < 300) { // 判断状态码
+                  if (res.data && res.data.error === '0') { // 判断后台
+                    if (res.data.fund_uid === this.$route.query.creatorId) { // 对比用户id与创建者id是否相同
+                      this.commentItems.forEach((item) => { // 添加新属性
+                        if (typeof item.repay === 'undefined') {
+                          this.$set(item, 'repayShow', true)
+                          this.$set(item, 'repayBack', true)
+                        }
+                      })
+                    }
+                  }
+                }
+              })
             }
           }
         })
@@ -46,14 +63,29 @@
           sid: this.$app.sid(),
           content: this.comment
         }
-        this.$http.post('/api/user/comment', data).then(res => {
-          if (res.status >= 200 && res.status < 300) {
-            this.$toast(res.data.tips)
-            if (res.data && res.data.error === '0') {
-              this.getComments()
+        if (!this.repay) {
+          this.$http.post('/api/user/comment', data).then(res => {
+            if (res.status >= 200 && res.status < 300) {
+              this.$toast(res.data.tips)
+              if (res.data && res.data.error === '0') {
+                this.getComments()
+              }
             }
+          })
+        } else {
+          this.$app.post('/api/user/refer_comment', )
+        }
+      },
+      repayBack (index, authorName) {
+        this.commentItems.forEach((item, i) => {
+          if (index === i) {
+            this.repay = item.repayBack
+            item.repayBack = !item.repayBack
+          } else {
+            item.repayBack = true
           }
         })
+        this.authorName = authorName
       }
     }
   }
@@ -69,17 +101,21 @@
     position: absolute
   .fund-comment
     padding-bottom: 50px
+    &.repayBack
+      padding-bottom: 62px
     .comment-repay
       background: #f2f2f2
       bottom: 0
-      height: 50px
       left: 0
+      padding-top: 10px
       position: fixed
       width: 100%
+      .repay-back
+        padding: 0px 12px
       .flex
         height: 30px
         line-height: 30px
-        margin: 10px 12px
+        padding: 0px 12px 10px
       .input
         background: none
         border-bottom: 1px solid #ff6053

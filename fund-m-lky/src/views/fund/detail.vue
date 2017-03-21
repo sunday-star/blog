@@ -7,7 +7,7 @@
     <img :src="data.picture" :alt="title" class="img">
     <div class="btn-groups">
       <a href="#" class="btn-l">我要支持</a>
-      <a href="#" class="btn-r">收藏</a>
+      <a class="btn-r" @click="collectHandler"><i :class="[isSaved ? 'icon-save' : 'icon-save-no'] "></i>收藏</a>
     </div>
     <div class="title">{{title}}</div>
     <div class="content">
@@ -33,10 +33,20 @@
       <router-link class="btn" :to="{path: '/fund/intro', query: {id: data.id}}">项目详情</router-link>
     </div>
     <div class="title">项目发起人</div>
-    <div class="content"></div>
+    <div class="content">
+      <div class="flex creator" v-if="data.creator">
+        <img :src="data.creator.avatar">
+        <div class="text">
+          {{data.creator.name}} <span>发起时间:{{data.addtime}}</span><br>
+          <i class="icon-company"></i>{{data.creator.company}}
+        </div>
+      </div>
+    </div>
     <div class="title">项目进展<router-link class="pull-right" :to="{path: '/fund/development', query: {id: data.id}}">查看全部</router-link></div>
-    <div class="content"></div>
-    <div class="title">热门评论<router-link class="pull-right" :to="{path: '/fund/comment', query: {id: data.id}}">更多评论</router-link></div>
+    <div class="content">
+      <development-item :item="data.development"></development-item>
+    </div>
+    <div class="title">热门评论<router-link class="pull-right" :to="{path: '/fund/comment', query: {id: data.id, creatorId: creator.id}}">更多评论</router-link></div>
     <div class="content">
       <comment-item :item="data.comment"></comment-item>
     </div>
@@ -46,15 +56,44 @@
 </template>
 
 <script>
+  import developmentItem from '../../components/development-item.vue'
   import commentItem from '../../components/comment-item.vue'
   export default {
     components: {
+      developmentItem,
       commentItem
     },
     data () {
       return {
         title: '',
-        data: ''
+        data: '',
+        creator: '',
+        isSaved: false
+      }
+    },
+    methods: {
+      collectHandler () {
+        const id = this.$route.query.id
+        const sid = this.$app.sid()
+        if (this.isSaved) {
+          this.$http.get('/api/user/del_collect?fund_id=' + id + '&sid=' + sid).then(res => {
+            if (res.status >= 200 && res.status < 300) {
+              if (res.data && res.data.error === '0') {
+                this.$toast(res.data.tips)
+                this.isSaved = false
+              }
+            }
+          })
+        } else {
+          this.$http.get('/api/user/collect?fund_id=' + id + '&sid=' + sid).then(res => {
+            if (res.status >= 200 && res.status < 300) {
+              if (res.data && res.data.error === '0') {
+                this.$toast(res.data.tips)
+                this.isSaved = true
+              }
+            }
+          })
+        }
       }
     },
     mounted () {
@@ -64,6 +103,8 @@
           if (res.data && res.data.error === '0') {
             this.title = res.data.data.title
             this.data = res.data.data
+            this.creator = res.data.data.creator
+            this.isSaved = res.data.data.collect === '1'
           }
         }
       }).catch(err => {
@@ -90,7 +131,27 @@
       background: #fff
       margin-bottom: 12px
       padding: 12px
-      .comment-item
+      .creator
+        img
+          border-radius: 50%
+          height: 40px
+          margin-right: 12px
+          width: 40px
+        .text
+          font-size: 14px
+          line-height: 1.2
+          span
+            color: #999
+            font-size: 12px
+        .icon-company
+          background: url('../../assets/img/icon-company.png') no-repeat center center
+          background-size: 100% 100%
+          display: inline-block
+          height: 20px
+          margin-right: 5px
+          vertical-align: middle
+          width: 20px
+      .development-item,.comment-item
         padding: 0
       .btn
         background: #ff6503
@@ -129,6 +190,7 @@
       overflow: hidden
       position: fixed
       width: 100%
+      z-index: 1000
       .btn-l
         background: #ff6503
         color: #fff
@@ -143,8 +205,11 @@
         background: #f8f8f8
         display: block
         float: right
+        font-size: 16px
         height: 100%
+        line-height: 46px
         position: relative
+        text-align: center
         width: 30%
         &:after
           border-color: transparent #f8f8f8 #f8f8f8 transparent

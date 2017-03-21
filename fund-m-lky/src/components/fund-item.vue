@@ -43,8 +43,10 @@
     &:not(:first-child)
       border-top: 1px solid #eee
     > a
+      background-color: #eee
       display: block
       margin-bottom: 5px
+      min-height: 150px
       img
         display: block
         width: 100%
