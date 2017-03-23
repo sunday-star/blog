@@ -6,8 +6,9 @@
         <comment-item v-for="(item, index) in commentItems" :item="item" :key="item" @repay="repayBack(index, item.author.name)"></comment-item>
       </transition-group>
     </div>
+    <div class="no-data" v-if="commentItems.length === 0">暂无项目评论</div>
     <div class="comment-repay">
-      <div class="repay-back" v-if="repay">回复: <span style="color: #ff6503">{{authorName}}</span></div>
+      <div class="repay-back" v-if="repay"><span style="color: #ff6503">@{{authorName}}</span></div>
       <div class="flex">
         <input type="text" class="input" v-model="comment">
         <a class="btn" @click="postComment">发布</a>
@@ -68,7 +69,10 @@
             if (res.status >= 200 && res.status < 300) {
               this.$toast(res.data.tips)
               if (res.data && res.data.error === '0') {
-                this.getComments()
+                setTimeout(() => {
+                  this.comment = ''
+                  this.getComments()
+                }, 250)
               }
             }
           })

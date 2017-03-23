@@ -136,4 +136,8 @@
     text-align: center
   .orange
     color: #ff6503
+  .no-data
+    background: #fff
+    font-size: 14px
+    padding: 12px
 </style>

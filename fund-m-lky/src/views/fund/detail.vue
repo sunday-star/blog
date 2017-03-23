@@ -6,7 +6,7 @@
     </headbar>
     <img :src="data.picture" :alt="title" class="img">
     <div class="btn-groups">
-      <a href="#" class="btn-l">我要支持</a>
+      <router-link class="btn-l" :to="{path: '/fund/d/pay', query: {id: data.id}}">我要支持</router-link>
       <a class="btn-r" @click="collectHandler"><i :class="[isSaved ? 'icon-save' : 'icon-save-no'] "></i>收藏</a>
     </div>
     <div class="title">{{title}}</div>
@@ -158,6 +158,7 @@
         border-radius: 5px
         color: #fff
         display: block
+        font-size: 14px
         margin: 5px auto 0
         padding: 10px 0
         text-align: center

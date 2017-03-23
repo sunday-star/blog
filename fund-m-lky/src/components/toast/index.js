@@ -23,7 +23,6 @@ var toast = function (options) {
   _toast.id = id
   _toast.vm = _toast.$mount()
   document.body.appendChild(_toast.vm.$el)
-  _toast.vm.visible = true
   _toast.dom = _toast.vm.$el
   toasts.push(_toast)
   return _toast.vm

@@ -6,6 +6,7 @@
         <development-item v-for="item in items" :item="item" :key="item"></development-item>
       </transition-group>
     </div>
+    <div class="no-data" v-if="items.length === 0">暂无项目进展</div>
   </div>
 </template>
 

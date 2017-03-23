@@ -5,7 +5,7 @@
       <img :src="user.avatar">
       <div>{{user.name}}<span>(ID:{{user.id}})</span></div>
     </div>
-    <router-link to="/fund/repay" class="route-btn"><img src="../../assets/img/manage-btn-2.png">众筹权益</router-link>
+    <router-link to="/fund/m/repay" class="route-btn"><img src="../../assets/img/manage-btn-2.png">众筹权益</router-link>
     <div class="tab">
       <div class="tab-item" v-for="(item, i) in tab" :class="{'current': i === tabCurrent}" @click="tabHandler(i)">{{item}}</div>
     </div>
@@ -31,7 +31,8 @@
         user: {},
         tab: ['我的支持', '我的收藏', '我的发起'],
         tabCurrent: 0,
-        items: []
+        items: [],
+        timer: ''
       }
     },
     mounted () {
@@ -60,13 +61,16 @@
         }
       },
       getItems (url, i) {
-        this.$http.get(url + '?sid=' + this.$app.sid()).then(res => {
-          if (res.status >= 200 && res.status < 300) {
-            if (res.data && res.data.error === '0') {
-              this.items = res.data.data[i]
+        this.items = []
+        this.timer = setTimeout(() => {
+          this.$http.get(url + '?sid=' + this.$app.sid()).then(res => {
+            if (res.status >= 200 && res.status < 300) {
+              if (res.data && res.data.error === '0') {
+                this.items = res.data.data[i]
+              }
             }
-          }
-        })
+          })
+        }, 250)
       },
       delCollect (index, id) {
         this.$http.get('/api/user/del_collect?fund_id=' + id + '&sid=' + this.$app.sid()).then(res => {
@@ -77,6 +81,11 @@
             }
           }
         })
+      }
+    },
+    beforeDestroy () {
+      if (this.timer !== '') {
+        window.clearTimeout(this.timer)
       }
     }
   }

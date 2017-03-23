@@ -1,33 +1,31 @@
 <template>
-  <transition name="slide-left">
-    <div class="toast" v-show="visible" >{{message}}</div>
-  </transition>
+  <div class="toast animated" :class="animateClass">{{message}}</div>
 </template>
 
 <script>
   export default {
     data () {
       return {
-        visible: false,
         message: '',
         onClose: null,
         duration: 3000,
         closed: false,
-        timer: null
+        timer: null,
+        animateClass: 'fadeIn'
       }
     },
     watch: {
       closed (val) {
         if (val) {
-          this.visible = false
-          this.$el.addEventListener('transitionend', this.destroyElement)
+          this.animateClass = 'fadeOut'
+          this.$el.addEventListener('animationend', this.destroyElement)
         }
       }
     },
 
     methods: {
       destroyElement () {
-        this.$el.removeEventListener('transitionend', this.destroyElement)
+        this.$el.removeEventListener('animationend', this.destroyElement)
         this.$destroy(true)
         this.$el.parentNode.removeChild(this.$el)
       },
@@ -68,4 +66,5 @@
     position: fixed
     top: 50%
     transform: translate(-50%, -50%)
+    white-space: nowrap
 </style>
