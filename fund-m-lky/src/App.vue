@@ -28,6 +28,15 @@
     mounted () {
       this.$app.init(this)
     },
+    methods: {
+      beforeEnter (el) {
+        console.log('before enter')
+      },
+      enter (el, done) {
+        console.log('enter')
+        done()
+      }
+    },
     watch: {
       '$route' (to, from) {
         document.body.scrollTop = 0

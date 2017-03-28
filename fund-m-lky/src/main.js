@@ -10,11 +10,13 @@ import FastClick from 'fastclick'
 import promise from 'es6-promise'
 import qs from 'qs'
 import Swiper from 'swiper'
+import Velocity from 'velocity-animate'
 import 'swiper/dist/css/swiper.min.css'
 import 'animate.css'
 import install from './components/install.js'
 import scroll from './components/scroll.js'
 window.Swiper = Swiper
+window.Velocity = Velocity
 promise.polyfill()
 
 Vue.use(scroll)
