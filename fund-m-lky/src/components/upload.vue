@@ -14,6 +14,7 @@
     data () {
       return {
         fileList: [],
+        res: [],
         percent: 0
       }
     },
@@ -27,6 +28,7 @@
         if (window.File && window.FileReader && window.FormData) {
           for (var i = 0; i < this.file.files.length; i++) {
             if (imageType.test(this.file.files[i].type)) {
+              url = window.URL.createObjectURL(this.file.files[i])
               this.readFile(this.file.files[i])
             } else {
               this.$toast('Not a valid image!')
@@ -35,6 +37,12 @@
         } else {
           this.$toast('File upload is not supported!')
         }
+        item = {
+          url: url,
+          file: this.file.files[i]
+        }
+        this.fileList.push(item)
+        this.$emit('add', this.fileList, this.res)
       },
       readFile (file) {
         let reader = new window.FileReader()
@@ -54,8 +62,8 @@
         xhr.onreadystatechange = function () {
           if (xhr.readyState === 4 && xhr.status === 200) {
             let data = JSON.parse(xhr.response)
-            _this.fileList.push(data.url)
-            _this.$emit('add', _this.fileList)
+            _this.res.push(data.url)
+            _this.$emit('add', _this.fileList, _this.res)
           }
         }
         xhr.upload.addEventListener('progress', function (e) {

@@ -1,7 +1,7 @@
 <template>
   <div class="fund-development">
     <headbar>
-      <router-link class="icon-back" :to="{path: '/fund/development?id=' + this.$route.query.id}" slot="left"></router-link>添加项目进展
+      <router-link class="icon-back" :to="{path: '/fund/manage/' + this.$route.query.id}" slot="left"></router-link>添加项目进展
     </headbar>
     <div class="content">
       <textarea placeholder="项目进度描述" v-model="text"></textarea>
@@ -25,26 +25,29 @@
       return {
         url: '',
         list: [],
+        res: [],
         text: ''
       }
     },
     methods: {
-      add (fileList) {
+      add (fileList, res) {
         this.list = fileList
+        this.res = res
       },
       addDevelopment () {
         let data = {
           fund_id: this.$route.query.id,
           sid: this.$app.sid(),
           text: this.text,
-          picture: this.list
+          picture: this.res
         }
-        this.$http.post('/api/user/add_development', data).then(res => {
+        this.$http.post('http://www.luokeyun.com/fundadmin/api/user/add_development', data).then(res => {
           if (res.status >= 200 && res.status < 300) {
             if (res.data && res.data.error === '0') {
               this.$toast(res.data.tips)
               this.text = ''
               this.list = []
+              this.res = []
             } else {
               this.$toast(res.data.tips)
             }
@@ -55,6 +58,7 @@
       },
       del (i) {
         this.list.splice(i, 1)
+        this.res.splice(i, 1)
       }
     }
   }

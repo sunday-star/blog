@@ -3,7 +3,7 @@
     <div class="swiper-wrapper">
       <div class="swiper-slide" v-for="item in slideItems">
         <div class="swiper-slide-img"><img :src="item.picture"></div>
-        <div class="swiper-slide-title">{{item.title}}</div>
+        <!-- <div class="swiper-slide-title">{{item.title}}</div> -->
       </div>
     </div>
     <div class="swiper-pagination"></div>

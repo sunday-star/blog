@@ -78,7 +78,7 @@
         const id = this.$route.query.id
         const sid = this.$app.sid()
         if (this.isSaved) {
-          this.$http.get('/api/user/del_collect?fund_id=' + id + '&sid=' + sid).then(res => {
+          this.$http.get('http://www.luokeyun.com/fundadmin/api/user/del_collect?fund_id=' + id + '&sid=' + sid).then(res => {
             if (res.status >= 200 && res.status < 300) {
               if (res.data && res.data.error === '0') {
                 this.$toast(res.data.tips)
@@ -89,7 +89,7 @@
             this.$app.error(err)
           })
         } else {
-          this.$http.get('/api/user/collect?fund_id=' + id + '&sid=' + sid).then(res => {
+          this.$http.get('http://www.luokeyun.com/fundadmin/api/user/collect?fund_id=' + id + '&sid=' + sid).then(res => {
             if (res.status >= 200 && res.status < 300) {
               if (res.data && res.data.error === '0') {
                 this.$toast(res.data.tips)
@@ -104,7 +104,7 @@
     },
     mounted () {
       this.$toast.close()
-      this.$http.get('/api/fund/detail?id=' + this.$route.query.id).then(res => {
+      this.$http.get('http://www.luokeyun.com/fundadmin/api/fund/detail?id=' + this.$route.query.id).then(res => {
         if (res.status >= 200 && res.status < 300) {
           if (res.data && res.data.error === '0') {
             this.title = res.data.data.title
@@ -137,6 +137,7 @@
       background: #fff
       font-size: 14px
       margin-bottom: 12px
+      overflow: hidden
       padding: 12px
       .creator
         img

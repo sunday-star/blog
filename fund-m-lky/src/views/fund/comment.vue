@@ -36,11 +36,11 @@
     },
     methods: {
       getComments () {
-        this.$http.get('/api/fund/comment?id=' + this.$route.query.id + '&sid=' + this.$app.sid()).then(res => {
+        this.$http.get('http://www.luokeyun.com/fundadmin/api/fund/comment?id=' + this.$route.query.id + '&sid=' + this.$app.sid()).then(res => {
           if (res.status >= 200 && res.status < 300) {
             if (res.data && res.data.error === '0') {
               this.commentItems = res.data.data.comment
-              this.$http.get('/api/user/index?sid=' + this.$app.sid()).then(res => {
+              this.$http.get('http://www.luokeyun.com/fundadmin/api/user/index?sid=' + this.$app.sid()).then(res => {
                 if (res.status >= 200 && res.status < 300) { // 判断状态码
                   if (res.data && res.data.error === '0') { // 判断后台
                     if (res.data.fund_uid === this.$route.query.creatorId) { // 对比用户id与创建者id是否相同
@@ -69,7 +69,7 @@
           content: this.comment
         }
         if (!this.repay) {
-          this.$http.post('/api/user/comment', data).then(res => {
+          this.$http.post('http://www.luokeyun.com/fundadmin/api/user/comment', data).then(res => {
             if (res.status >= 200 && res.status < 300) {
               this.$toast(res.data.tips)
               if (res.data && res.data.error === '0') {
@@ -83,7 +83,7 @@
             this.$app.error(err)
           })
         } else {
-          this.$app.post('/api/user/refer_comment', )
+          this.$app.post('http://www.luokeyun.com/fundadmin/api/user/refer_comment', )
         }
       },
       repayBack (index, authorName) {

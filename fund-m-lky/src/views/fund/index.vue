@@ -43,7 +43,7 @@
       onScroll () {
         if (this.fundItems.length !== Number(this.total)) {
           this.page++
-          this.$http.get('/api/index?page=' + this.page + '&page_size=10').then(res => {
+          this.$http.get('http://www.luokeyun.com/fundadmin/api/index?page=' + this.page + '&page_size=10').then(res => {
             if (res.status >= 200 && res.status < 300) {
               if (res.data && res.data.error === '0') {
                 this.fundItems = this.fundItems.concat(res.data.data.fund)
@@ -56,7 +56,7 @@
       }
     },
     mounted () {
-      this.$http.get('/api/index?page=1&page_size=10').then(res => {
+      this.$http.get('http://www.luokeyun.com/fundadmin/api/index?page=1&page_size=10').then(res => {
         if (res.status >= 200 && res.status < 300) {
           if (res.data && res.data.error === '0') {
             this.fund = res.data.data

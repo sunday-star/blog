@@ -16,9 +16,15 @@
           <span class="btn" slot="head" v-if="tabCurrent === 1" @click="delCollect(index, item.fund.id)">取消收藏</span>
           <router-link class="btn" slot="head" v-if="tabCurrent === 2" :to="{path: '/fund/manage/' + item.id}">管理</router-link>
           <div slot="body" class="body flex">
-            <v-circle :percent="item.fund.percent" v-if="tabCurrent === 0"></v-circle>
-            <v-circle :percent="item.fund.percent" v-if="tabCurrent === 1"><img :src="item.fund.picture"></v-circle>
-            <v-circle :percent="item.percent" v-if="tabCurrent === 2"><img :src="item.picture"></v-circle>
+            <router-link :to="{path: '/fund/detail?id=' + item.fund.id}" v-if="tabCurrent === 0">
+              <v-circle :percent="item.fund.percent"><img :src="item.fund.picture"></v-circle>              
+            </router-link>
+            <router-link :to="{path: '/fund/detail?id=' + item.fund.id}" v-if="tabCurrent === 1">
+              <v-circle :percent="item.fund.percent"><img :src="item.fund.picture"></v-circle>
+            </router-link>
+            <router-link :to="{path: '/fund/detail?id=' + item.id}" v-if="tabCurrent === 2">
+              <v-circle :percent="item.percent"><img :src="item.picture"></v-circle>
+            </router-link>
             <div class="item" v-if="tabCurrent === 0">
               <div class="flex">
                 <div>
@@ -90,7 +96,7 @@
       }
     },
     mounted () {
-      this.$http.get('/api/user/index?sid=' + this.$app.sid()).then(res => {
+      this.$http.get('http://www.luokeyun.com/fundadmin/api/user/index?sid=' + this.$app.sid()).then(res => {
         if (res.status >= 200 && res.status < 300) {
           if (res.data && res.data.error === '0') {
             this.user = res.data.data
@@ -120,7 +126,7 @@
       getItems (url, i) {
         this.items = []
         this.timer = setTimeout(() => {
-          this.$http.get(url + '?sid=' + this.$app.sid() + '&page=' + this.page+ '&page_size=10').then(res => {
+          this.$http.get('http://www.luokeyun.com/fundadmin' + url + '?sid=' + this.$app.sid() + '&page=' + this.page+ '&page_size=10').then(res => {
             if (res.status >= 200 && res.status < 300) {
               if (res.data && res.data.error === '0') {
                 this.total = Number(res.data.total)
@@ -136,7 +142,7 @@
         }, 250)
       },
       delCollect (index, id) {
-        this.$http.get('/api/user/del_collect?fund_id=' + id + '&sid=' + this.$app.sid()).then(res => {
+        this.$http.get('http://www.luokeyun.com/fundadmin/api/user/del_collect?fund_id=' + id + '&sid=' + this.$app.sid()).then(res => {
           if (res.status >= 200 && res.status < 300) {
             if (res.data && res.data.error === '0') {
               this.$toast(res.data.tips)
@@ -162,7 +168,7 @@
         }
         if (this.items.length !== this.total) {
           this.page++
-          this.$http.get(url + '?sid=' + this.$app.sid() + '&page=' + this.page+ '&page_size=10').then(res => {
+          this.$http.get('http://www.luokeyun.com/fundadmin' + url + '?sid=' + this.$app.sid() + '&page=' + this.page+ '&page_size=10').then(res => {
             if (res.status >= 200 && res.status < 300) {
               if (res.data && res.data.error === '0') {
                 this.items = this.items.concat(res.data.data[i])
@@ -234,4 +240,9 @@
         .body
           font-size: 14px
           line-height: 2
+        .btn
+          background: #ff6503
+          border-radius: 2px
+          color: #fff
+          padding: 5px 10px
 </style>

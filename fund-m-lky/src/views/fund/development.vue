@@ -2,7 +2,7 @@
   <div class="fund-development">
     <headbar>
       <router-link class="icon-back" :to="{path: '/fund/detail?id=' + this.$route.query.id}" slot="left"></router-link>项目进展
-      <router-link class="icon-plus" :to="{path: '/fund/development/add?id=' + this.$route.query.id}" slot="right"></router-link>
+      <!-- <router-link class="icon-plus" :to="{path: '/fund/development/add?id=' + this.$route.query.id}" slot="right"></router-link> -->
     </headbar>
     <div class="development-list">
       <transition-group name="list">
@@ -25,7 +25,7 @@
       }
     },
     mounted () {
-      this.$http.get('/api/fund/development?id=' + this.$route.query.id + '&sid=' + this.$app.sid()).then(res => {
+      this.$http.get('http://www.luokeyun.com/fundadmin/api/fund/development?id=' + this.$route.query.id + '&sid=' + this.$app.sid()).then(res => {
         if (res.status >= 200 && res.status < 300) {
           if (res.data && res.data.error === '0') {
             this.items = res.data.data.development

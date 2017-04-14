@@ -13,7 +13,7 @@
       }
     },
     mounted () {
-      this.$http.get('/api/fund/intro?id=' + this.$route.query.id).then(res => {
+      this.$http.get('http://www.luokeyun.com/fundadmin/api/fund/intro?id=' + this.$route.query.id).then(res => {
         if (res.status >= 200 && res.status < 300) {
           if (res.data && res.data.error === '0') {
             this.intro = res.data.data.intro_full

@@ -29,24 +29,44 @@
       </div>
       <div class="title">众筹用户</div>
       <div class="content">暂无众筹用户</div>
+      <div class="title flex between"><div>众筹进度</div><router-link class="btn" :to="{path: '/fund/development/add?id=' + this.$route.params.id}">添加众筹进度</router-link></div>
+      <div class="content">
+        <div class="development-list">
+          <transition-group name="list">
+            <development-item v-for="item in items" :item="item" :key="item"></development-item>
+          </transition-group>
+        </div>
+        <div class="no-data" v-if="items.length === 0" style="padding: 0">暂无项目进展</div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+  import developmentItem from '../../components/development-item.vue'
   export default {
     data () {
       return {
         fund: '',
-        order: []
+        order: [],
+        items: []
       }
     },
     mounted () {
-      this.$http.get('/api/user/fund_order?id=' + this.$route.params.id + '&sid=' + this.$app.sid()).then(res => {
+      this.$http.get('http://www.luokeyun.com/fundadmin/api/user/fund_order?id=' + this.$route.params.id + '&sid=' + this.$app.sid()).then(res => {
         if (res.status >= 200 && res.status < 300) {
           if (res.data && res.data.error === '0') {
             this.fund = res.data.data.fund
             this.order = res.data.data.order
+          }
+        }
+      }).catch(err => {
+        this.$app.error(err)
+      })
+      this.$http.get('http://www.luokeyun.com/fundadmin/api/fund/development?id=' + this.$route.query.id + '&sid=' + this.$app.sid()).then(res => {
+        if (res.status >= 200 && res.status < 300) {
+          if (res.data && res.data.error === '0') {
+            this.items = res.data.data.development
           }
         }
       }).catch(err => {
@@ -66,6 +86,15 @@
       padding: 10px 12px
       &:not(:first-child)
         margin-top: 12px
+      &.flex
+        align-items: center
+      .btn
+        background-color: #ff6503
+        border-radius: 2px
+        color: #fff
+        float: right
+        font-size: 12px
+        padding: 5px 10px
     .content
       background-color: #fff
       font-size: 14px

@@ -30,7 +30,7 @@ export default {
     console.log(err)
     window.localStorage.setItem('FUND_URL', window.location.href)
     // let target = encodeURIComponent('http://' + window.location.host + '/#/session')
-    let target = encodeURIComponent('http://' + window.location.host + '/#/session')
+    let target = encodeURIComponent('http://' + window.location.host + '/fund/mobile/index.html#/session')
     window.location.href = window.appConfig.apiHost + 'login/index?target=' + target
   }
 }

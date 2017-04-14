@@ -13,7 +13,7 @@
       }
     },
     mounted () {
-      this.$http.get('/api/user/my_repay?sid=' + this.$app.sid()).then(res => {
+      this.$http.get('http://www.luokeyun.com/fundadmin/api/user/my_repay?sid=' + this.$app.sid()).then(res => {
         if (res.status >= 200 && res.status < 300) {
           if (res.data && res.data.error === '0') {
             this.items = res.data.data

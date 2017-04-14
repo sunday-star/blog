@@ -56,7 +56,7 @@
       }
     },
     mounted () {
-      this.$http.get('/api/fund/detail?id=' + this.$route.query.id).then(res => {
+      this.$http.get('http://www.luokeyun.com/fundadmin/api/fund/detail?id=' + this.$route.query.id).then(res => {
         if (res.status >= 200 && res.status < 300) {
           if (res.data && res.data.error === '0') {
             this.coin = res.data.data.coin
