@@ -8,9 +8,9 @@
       let query = this.$route.query
       if (query.sid !== undefined) {
         this.$app.setSid(query.sid)
-        if (window.localStorage.getItem('OLD_URL') !== undefined) {
-          // window.location.href = window.localStorage.getItem('OLD_URL')
-          // window.localStorage.removeItem('OLD_URL')
+        if (window.localStorage.getItem('FUND_URL') !== undefined) {
+          window.location.href = window.localStorage.getItem('FUND_URL')
+          window.localStorage.removeItem('FUND_URL')
         }
       }
     }

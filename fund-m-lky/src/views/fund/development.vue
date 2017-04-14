@@ -1,6 +1,9 @@
 <template>
   <div class="fund-development">
-    <headbar><router-link class="icon-back" :to="{path: '/fund/detail?id=' + this.$route.query.id}" slot="left"></router-link>项目进展</headbar>
+    <headbar>
+      <router-link class="icon-back" :to="{path: '/fund/detail?id=' + this.$route.query.id}" slot="left"></router-link>项目进展
+      <router-link class="icon-plus" :to="{path: '/fund/development/add?id=' + this.$route.query.id}" slot="right"></router-link>
+    </headbar>
     <div class="development-list">
       <transition-group name="list">
         <development-item v-for="item in items" :item="item" :key="item"></development-item>
@@ -28,12 +31,15 @@
             this.items = res.data.data.development
           }
         }
+      }).catch(err => {
+        this.$app.error(err)
       })
     }
   }
 </script>
 
 <style lang="stylus">
-  .development-list
-    background: #fff
+  .fund-development
+    .development-list
+      background: #fff
 </style>

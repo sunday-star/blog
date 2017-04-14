@@ -26,7 +26,7 @@
             <input type="password" placeholder="输入交易密码">
           </div>
           <div class="coin-input">
-            <a class="coin-input-btn">获取验证码</a>
+            <a class="coin-input-btn" @click="getCode">{{codeText}}</a>
             <input type="text" placeholder="输入手机验证码">
           </div>
         </div>
@@ -51,7 +51,8 @@
         data: '',
         visible: false,
         maskAnimate: '',
-        num: ''
+        num: '',
+        codeText: '获取验证码'
       }
     },
     mounted () {
@@ -66,6 +67,8 @@
             this.price = (Number(this.showCoin.rate) * Number(this.data.price) / Number(this.showCoin.rate)).toFixed(6)
           }
         }
+      }).catch(err => {
+        this.$app.error(err)
       })
     },
     methods: {
@@ -92,9 +95,22 @@
       hideMask () {
         this.maskAnimate = 'fadeOutDown'
         this.$el.addEventListener('animationend', this.hideVisible)
+        window.clearInterval(this.timer)
       },
       hideVisible () {
         this.visible = false
+      },
+      getCode () {
+        this.codeText = '60'
+        this.timer = window.setInterval(() => {
+          const code = parseInt(this.codeText)
+          if (code > 0) {
+            this.codeText = code - 1
+          } else {
+            this.codeText = '获取验证码'
+            window.clearInterval(this.timer)
+          }
+        }, 1000)
       }
     }
   }
@@ -144,10 +160,13 @@
         background: #ff6503
         border-radius: 5px
         color: #fff
-        padding: 4px 12px 5px
+        // padding: 4px 12px 5px
+        line-height: 28px
         position: absolute
         right: 12px
+        text-align: center
         top: 6px
+        width: 100px
     .btn
       background: #ff6503
       border-radius: 5px

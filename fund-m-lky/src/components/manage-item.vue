@@ -4,7 +4,7 @@
       <div>{{itemTitle}}</div>
       <div><slot name="head"></slot></div>
     </div>
-    <div class="body"></div>
+    <slot name="body"></slot>
   </div>
 </template>
 

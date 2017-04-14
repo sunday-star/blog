@@ -79,6 +79,18 @@
     margin-left: -3px
     margin-top: 9px
     width: 24px
+  .icon-right
+    background: url('./assets/img/right.png') no-repeat center center
+    background-size: 100% 100%
+    display: inline-block
+    height: 24px
+    width: 24px
+  .icon-plus
+    background: url('./assets/img/plus.png') no-repeat center center
+    background-size: 100% 100%
+    display: inline-block
+    height: 24px
+    width: 24px
   .icon-deal
     background: url('./assets/img/icon-deal.png') no-repeat center center
     background-size: 100% 100%
@@ -141,6 +153,7 @@
       justify-content: space-between
     .item
       flex: 1
+      position: relative
   .text-center
     text-align: center
   .orange

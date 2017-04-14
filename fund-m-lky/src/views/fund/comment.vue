@@ -53,9 +53,13 @@
                     }
                   }
                 }
+              }).catch(err => {
+                this.$app.error(err)
               })
             }
           }
+        }).catch(err => {
+          this.$app.error(err)
         })
       },
       postComment () {
@@ -75,6 +79,8 @@
                 }, 250)
               }
             }
+          }).catch(err => {
+            this.$app.error(err)
           })
         } else {
           this.$app.post('/api/user/refer_comment', )

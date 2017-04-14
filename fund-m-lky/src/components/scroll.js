@@ -1,17 +1,15 @@
 let scrollCallback = function (callback) {
-  if (document.body.scrollHeight < 1000) {
+  if (document.body.scrollHeight <= document.body.clientHeight) {
     return
   }
-  if (document.body.scrollHeight - window.scrollY - 100 <= document.body.clientHeight) {
+  if (document.body.scrollHeight - window.scrollY<= document.body.clientHeight) {
     callback()
   }
 }
 let callBackWarpped
 var vueScroll = (Vue) => {
-  console.log('vueScroll')
   Vue.directive('scroll', {
-    bind (el, binding, vnode) {
-      console.log(binding.value)
+    inserted (el, binding, vnode) {
       callBackWarpped = scrollCallback.bind({}, binding.value)
       window.addEventListener('scroll', callBackWarpped)
     },

@@ -38,4 +38,6 @@
       position: absolute
       right: 15px
       top: 0
+      a,span
+        margin-top: 9px
 </style>

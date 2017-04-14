@@ -13,7 +13,7 @@
     <div class="content">
       <div class="flex between">
         <div class="text-center">
-          <div class="circle">{{data.price}}<span v-if="data.show_coin">{{data.show_coin.code}}</span></div>权益单价
+          <div class="circle">{{data.price}}<span v-if="data.show_coin"></span></div>权益单价
         </div>
         <div class="text-center">
           <div class="circle">{{(data.recent / data.target * 100).toFixed(2)}}%</div>已达
@@ -43,13 +43,15 @@
       </div>
     </div>
     <div class="title">项目进展<router-link class="pull-right" :to="{path: '/fund/development', query: {id: data.id}}">查看全部</router-link></div>
-    <div class="content">
+    <div class="content" v-if="data.development && data.development.id">
       <development-item :item="data.development"></development-item>
     </div>
+    <div class="content" v-else>暂无项目进度</div>
     <div class="title">热门评论<router-link class="pull-right" :to="{path: '/fund/comment', query: {id: data.id, creatorId: creator.id}}">更多评论</router-link></div>
-    <div class="content">
+    <div class="content" v-if="data.comment">
       <comment-item :item="data.comment"></comment-item>
     </div>
+    <div class="content" v-else>暂无项目评论</div>
     <div class="title">权益说明</div>
     <div class="content" v-html="data.repay"></div>
   </div>
@@ -83,6 +85,8 @@
                 this.isSaved = false
               }
             }
+          }).catch(err => {
+            this.$app.error(err)
           })
         } else {
           this.$http.get('/api/user/collect?fund_id=' + id + '&sid=' + sid).then(res => {
@@ -92,6 +96,8 @@
                 this.isSaved = true
               }
             }
+          }).catch(err => {
+            this.$app.error(err)
           })
         }
       }
@@ -129,6 +135,7 @@
         font-size: 14px
     .content
       background: #fff
+      font-size: 14px
       margin-bottom: 12px
       padding: 12px
       .creator

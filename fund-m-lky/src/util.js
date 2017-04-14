@@ -7,6 +7,9 @@ export default {
   sid () {
     return this.getCookie(_sid)
   },
+  setSid (val) {
+    this.setCookie(_sid, val, 30)
+  },
   setCookie (cname, cvalue, exdays) {
     var d = new Date()
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000))
@@ -25,5 +28,9 @@ export default {
   },
   error (err) {
     console.log(err)
+    window.localStorage.setItem('FUND_URL', window.location.href)
+    // let target = encodeURIComponent('http://' + window.location.host + '/#/session')
+    let target = encodeURIComponent('http://' + window.location.host + '/#/session')
+    window.location.href = window.appConfig.apiHost + 'login/index?target=' + target
   }
 }
