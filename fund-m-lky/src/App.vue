@@ -1,5 +1,5 @@
 <template>
-  <div class="app" style="height: 100%;overflow-x: hidden;">
+  <div class="app" style="height: 100%;">
     <transition :name="transitionName">
       <router-view></router-view>
     </transition>
@@ -18,10 +18,10 @@
         navbarShow: true,
         transitionName: 'slide-left',
         navbarItems: [
-          {name: '交易', 'route': { path: '/trade' }, icon: 'icon-deal'},
+          {name: '交易', 'route': { href: 'http://www.luokeyun.com/m/trade/index.html' }, icon: 'icon-deal'},
           {name: '众筹', 'route': { path: '/fund' }, icon: 'icon-fund'},
-          {name: '资讯', 'route': { path: '/news'}, icon: 'icon-news'},
-          {name: '我的', 'route': { path: '/mine'}, icon: 'icon-user'}
+          {name: '资讯', 'route': { href: 'http://www.luokeyun.com/m/news/index.html?id=2'}, icon: 'icon-news'},
+          {name: '我的', 'route': { href: 'http://www.luokeyun.com/m/user/index.html'}, icon: 'icon-user'}
         ]
       }
     },

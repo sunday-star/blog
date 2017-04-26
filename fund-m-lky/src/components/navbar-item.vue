@@ -1,7 +1,8 @@
 <template>
-  <router-link :to="prop.route" class="navbar-item" active-class="active">
+  <router-link :to="prop.route" class="navbar-item" active-class="active" v-if="prop.route.path">
     <slot></slot>
   </router-link>
+  <a :href="prop.route.href" class="navbar-item" v-else><slot></slot></a>
 </template>
 
 <script>

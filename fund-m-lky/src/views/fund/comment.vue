@@ -2,9 +2,7 @@
   <div class="fund-comment" :class="{'repayBack': repay}">
     <headbar><router-link class="icon-back" :to="{path: '/fund/detail?id=' + this.$route.query.id}" slot="left"></router-link>更多评论</headbar>
     <div class="comment-list">
-      <transition-group name="list">
         <comment-item v-for="(item, index) in commentItems" :item="item" :key="item" @repay="repayBack(index, item.author.name)"></comment-item>
-      </transition-group>
     </div>
     <div class="no-data" v-if="commentItems.length === 0">暂无项目评论</div>
     <div class="comment-repay">

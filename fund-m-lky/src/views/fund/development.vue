@@ -5,9 +5,7 @@
       <!-- <router-link class="icon-plus" :to="{path: '/fund/development/add?id=' + this.$route.query.id}" slot="right"></router-link> -->
     </headbar>
     <div class="development-list">
-      <transition-group name="list">
         <development-item v-for="item in items" :item="item" :key="item"></development-item>
-      </transition-group>
     </div>
     <div class="no-data" v-if="items.length === 0">暂无项目进展</div>
   </div>

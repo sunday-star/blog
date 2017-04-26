@@ -3,7 +3,7 @@
     <div class="time">{{item.addtime}}</div>
     <div class="text">{{item.text}}</div>
     <div class="flex">
-      <div class="pic" v-for="i in item.picture"><img :src="i"></div>
+      <div class="pic" v-for="i in item.picture"><img :src="i.url" v-if="typeof i === 'object'"><img :src="i" v-else></div>
     </div>
   </div>
 </template>
