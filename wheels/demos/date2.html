@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>date2</title>
+</head>
+<body>
+
+
+  <script src="../lib/date2/index.js"></script>
+  <script>
+    {
+      let assert = console.assert.bind(document.write)
+      let date = new Date(2011, 0, 4, 6, 8, 10, 999)
+      let d1 = new Date2(date)
+      d1.weekday()
+      assert(d1.date !== date)
+      assert(d1.date.getTime() === date.getTime())
+    }
+  </script>
+</body>
+</html>
